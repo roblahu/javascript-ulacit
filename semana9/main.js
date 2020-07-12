@@ -32,6 +32,7 @@ function mostrarResultados(){
 		$("#wrapper").append(tr);
 	});
 	$("#wrapper").append('<br>');
+	/*arrays();*/
 }
 
 function eliminar(id){
@@ -40,6 +41,14 @@ function eliminar(id){
 	});
 	mostrarResultados();
 }
+
+/*function arrays(){
+var arr = [];
+for (var i = 0; i < 10; i++) {
+	arr[i] = [];
+}
+console.log(arr)
+}*/
 
 var descripcion = 0;
 var array = [];
@@ -51,10 +60,11 @@ function guardarDescripcion(id){
 function verDescripcion(id){
 	var elementos = "";   
 	for (var y=0; y < array.length; y++){
-		elementos += array[y] + " ";
+		elementos += "'" + array[y] + "'" + " ";
 	}
 	$("#descripciones").text(elementos);
 	alert(elementos);
 }
+
 
 
