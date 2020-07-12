@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="main.js"></script>
@@ -10,14 +10,24 @@
 </head>
 <body>
 	<div id="div1">
-		<h2>Se va a cambiar este texto</h2>
+		<h2>Instrucciones del Hackaton</h2>
+
+		<h4>1. Usando el AJAX que se vio como ejemplo, consultar la lista de usuarios disponible </h4>
+		<h4>2. Una vez se alla leido el AJAX se debe mostar una tabla con la lista de todos los usuarios, incluida la imagen del usuario</h4>
+		<h4>3. Utilizando JQUERY, se debe poder eliminar de la tabla un usuario (Solo eliminar de la tabla local creada con la respuesta)</h4>
+		<h4>4. Usando Jquery, poder agregarle una descripción a cada usuario, puede quedar en un Array temporal dicha descripción</h4><br> 
+
 	</div>
-	<!-- <button id="interno">Llamar AJAX Local</button> -->
-	<button onclick="ExternalAjax();">Llamar AJAX externo</button>
 
+	<button onclick="ExternalAjax();">Lista de Usuarios</button>
 
-<div class="wrapper">
-    </div>
+	<div id="wrapper">
+	</div>
+
+	<br>
+
+	<h4>Descripciones de usuarios:</h4><br> 
+	<p id="descripciones"></p> 
 
 </body>
 </html>

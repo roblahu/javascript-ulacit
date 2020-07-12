@@ -1,38 +1,60 @@
-/*$(document).ready(function(){
-  $("#interno").click(function(){
-    $.ajax({url: "demo.txt", 
-    	success: function(result){
-      		$("#div1").html(result);
-    	}});
-  	});
-});*/
-
+let usuarios = [];
 
 function ExternalAjax(){
 	$.ajax({
-		url: "https://reqres.in/api/users",
+		url: "https://reqres.in/api/users?per_page=12",
 		type: "get",
 		success: function(response){
-			console.log(response);
-			var myJSON = JSON.stringify(response);
-			/*$("#div1").html(myJSON);*/
-
-
-			$(".wrapper").append("<th>Nombre</th><th>Apellido</th><th>Correo</th><th>Avatar</th><th>Borrar</th>")
-			$.each(JSON.parse(myJSON), function(i, data) {
-				var btn = "<center><button type='button' onclick='agregar_a_carrito(" + data +")'>Agregar al Carrito!</button></center>";
-				console.log(data);
-				var tr = $('<tr>').append(
-					$('<td>').text(data.first_name),
-					$('<td>').text(data.last_name),
-					$('<td>').text(data.email),
-					$('<td>').text(data.avatar),
-					$('<td>').append(btn)
-					); 
-				$(".wrapper").append(tr)
+			usuarios = response.data;
+			$.each(usuarios, function(i, usuario){
+				usuario.descripcion = "";	
 			});
-			$(".wrapper").append('<br>')
+			mostrarResultados();	
+
+
 		}
 	});
 }
+
+function mostrarResultados(){
+	$("#wrapper").text("");
+	$("#wrapper").append("<th>Nombre</th><th>Apellido</th><th>Correo</th><th>Avatar</th><th>Descripcion</th><th>Borrar</th>")
+	$.each(usuarios, function(i, usuario) {
+		var btn = "<center><button type='button' onclick='eliminar(" + usuario.id +")'>Eliminar</button></center>";
+		var tr = $('<tr>').append(
+			$('<td>').text(usuario.first_name),
+			$('<td>').text(usuario.last_name),
+			$('<td>').text(usuario.email),
+			$('<td>').append('<img src="' + usuario.avatar +'">'),
+			$('<td>').append('<textarea id="'+ usuario.id+'">'+ usuario.descripcion +'</textarea><button onclick="guardarDescripcion('+ usuario.id +')">Agregar</button>' +'<button onclick="verDescripcion('+ usuario.id +')">Ver Descripcion</button>'),
+			$('<td>').append(btn)
+		); 
+		$("#wrapper").append(tr);
+	});
+	$("#wrapper").append('<br>');
+}
+
+function eliminar(id){
+	usuarios = jQuery.grep(usuarios, function(usuario) {
+		return usuario.id != id;
+	});
+	mostrarResultados();
+}
+
+var descripcion = 0;
+var array = [];
+function guardarDescripcion(id){
+	array[descripcion] = $("#" + id).val();
+	descripcion++;
+}
+
+function verDescripcion(id){
+	var elementos = "";   
+	for (var y=0; y < array.length; y++){
+		elementos += array[y] + " ";
+	}
+	$("#descripciones").text(elementos);
+	alert(elementos);
+}
+
 
